@@ -6,18 +6,6 @@ import time
 from openai import OpenAI
 from pydantic import BaseModel
 
-# -----------------------------------------------------------------------------
-# 0. Display Page Header Function (Title on LHS, Image on RHS)
-# -----------------------------------------------------------------------------
-def display_page_header():
-    st.markdown("""
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <h1 style="margin: 0;">Basil</h1>
-            <img src="https://image.pollinations.ai/prompt/A%20photorealistic%20portrait%20of%20Basil%20-%20a%20man%20in%20his%20early%2030s%20with%20olive%20skin,%20hazel%20eyes%20flecked%20with%20green,%20dark%20wavy%20brown%20hair,%20thin-framed%20glasses,%20wearing%20a%20sky-blue%20shirt%20and%20jacket%20inspired%20by%20forget-me-not%20flowers,%20with%20subtle%20golden-yellow%20accents%20to%20echo%20the%20flower%20centers,%20and%20a%20small%20golden%20floral%20pin%20on%20the%20lapel,%20set%20against%20a%20soft%20blue-white%20gradient%20background,%20exuding%20calm%20confidence%20and%20thoughtful%20curiosity." 
-                 style="width:200px;">
-        </div>
-    """, unsafe_allow_html=True)
-
 
 # Optional: Set page config for a nicer look and a custom page title/icon
 st.set_page_config(
@@ -26,6 +14,10 @@ st.set_page_config(
     layout="centered"
 )
 
+st.sidebar.image(
+    "https://image.pollinations.ai/prompt/A%20photorealistic%20portrait%20of%20Basil%20-%20a%20man%20in%20his%20early%2030s%20with%20olive%20skin,%20hazel%20eyes%20flecked%20with%20green,%20dark%20wavy%20brown%20hair,%20thin-framed%20glasses,%20wearing%20a%20sky-blue%20shirt%20and%20jacket%20inspired%20by%20forget-me-not%20flowers,%20with%20subtle%20golden-yellow%20accents%20to%20echo%20the%20flower%20centers,%20and%20a%20small%20golden%20floral%20pin%20on%20the%20lapel,%20set%20against%20a%20soft%20blue-white%20gradient%20background,%20exuding%20calm%20confidence%20and%20thoughtful%20curiosity.",
+    use_container_width=True
+)
 
 st.sidebar.title("ForgetMeNot")
 
@@ -224,11 +216,9 @@ def find_similar_books(book_info: str):
 # 3. If user chooses the first tab: show the existing content
 # -----------------------------------------------------------------------------
 if tab == "Capture":
-
-    display_page_header()
     
     # -- Title (moved inside the "Main" tab)
-    st.title("Your Connection Assistant")
+    st.title("Basil, Your Connection Assistant")
     st.write(
         "Tired of forgetting names as you meet new people?\n"
         "Never remember the last interactions?\n"
@@ -359,8 +349,8 @@ if tab == "Capture":
 # 4. The second tab content (placeholder)
 # -----------------------------------------------------------------------------
 elif tab == "Curate":
-    display_page_header()
-    st.title("Your Connection Assistant")
+    
+    st.title("Basil, Your Connection Assistant")
     # st.write(
     #     """
     #     **forget me not** helps you remember important details about the people you meet,
@@ -400,7 +390,7 @@ elif tab == "Curate":
 
 elif tab == "Complete":
     display_page_header()
-    st.title("Your Connection Assistant")
+    st.title("Basil, Your Connection Assistant")
 
     # Check if there's any data in our DataFrame
     if not st.session_state.people_df.empty:
