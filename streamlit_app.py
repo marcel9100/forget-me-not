@@ -97,7 +97,7 @@ def find_next_football_match():
     - requests.get("https://api.football-data.org/...") 
     - or any sports data provider
     """
-    return "Next Premier League match: Arsenal vs. Man City on Sunday at 4 PM."
+    return "Next Premier League match: Arsenal vs. West Ham on 22nd Feb ."
 
 # -----------------------------------------------------------------------------
 # 3. If user chooses the first tab: show the existing content
@@ -279,8 +279,17 @@ elif tab == "Complete":
 
     # Check if there's any data in our DataFrame
     if not st.session_state.people_df.empty:
+        # Create a dropdown to select a user by their Name
+        selected_name = st.selectbox(
+            "Select a user",
+            st.session_state.people_df["Name"].tolist()
+        )
+
         # Grab the last row
-        last_row = st.session_state.people_df.iloc[-1]
+        # last_row = st.session_state.people_df.iloc[-1]
+        last_row = st.session_state.people_df[
+            st.session_state.people_df["Name"] == selected_name
+        ].iloc[0]
 
         # Create two columns: one for the image, one for the text
         col1, col2 = st.columns([1, 4])
