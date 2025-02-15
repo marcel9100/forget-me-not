@@ -496,6 +496,11 @@ elif tab == "Complete":
                 st.success("All tasks completed 🙂, Basil✅")
                 st.session_state.robot_executed = True
 
+                if "painting" in last_row["other_interesting_items"].lower():
+                    st.write("The Tate Modern has a Warhol exhibit next week")
+                    st.write("I have reserved some tickets for you!")
+                    st.write("## Tickets Reserved ✅")
+
                 # (Optional) If "football" is mentioned, do a placeholder web search
                 if "football" in last_row["other_interesting_items"].lower():
                     interim_text = "#### Football Detected - Searching next match...Booking next match..."
