@@ -467,10 +467,10 @@ elif tab == "Complete":
 
 
             # If "book" is mentioned in the recommendation or interests, call the new helper function.
-            if ("book" in selected_row["last_recommendation"].lower() or 
-                "book" in selected_row["other_interesting_items"].lower()):
+            if ("book" in last_row["last_recommendation"].lower() or 
+                "book" in last_row["other_interesting_items"].lower()):
                 st.write("#### Book Detected - Searching for similar books...")
-                similar_books = find_similar_books(selected_row["last_recommendation"])
+                similar_books = find_similar_books(last_row["last_recommendation"])
                 if similar_books:
                     st.write("**Similar Books:**")
                     for book in similar_books:
