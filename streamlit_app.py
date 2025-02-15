@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 
 from openai import OpenAI
+from pydantic import BaseModel
+
 
 
 
@@ -46,6 +48,13 @@ if "people_df" not in st.session_state:
         columns=["Name", "last_recommendation", "other_interesting_items", "analysis_json"]
     )
 
+
+class ContentFormat(BaseModel):
+    name: str
+    last_recommendation: str
+    other_interesting_items: str
+
+
 # -----------------------------------------------------------------------------
 # CLASS FOR MANAGING PEOPLE DATAFRAME
 # -----------------------------------------------------------------------------
@@ -61,7 +70,7 @@ class People:
         #    For example, using the Whisper API endpoint (pseudo-code):
         #
         with st.spinner("Transcribing audio..."):
-            transcript_response = client.Audio.transcribe(
+            transcript_response = client.audio.transcribe(
                 model="whisper-1",
                 file=audio_bytes  # This might need a file-like object
             )
@@ -75,10 +84,10 @@ class People:
         #    to return JSON with the fields: Name, last_recommendation, other_interesting_items
         #
         with st.spinner("Analyzing text..."):
-            analysis_response = client.ChatCompletion.create(
+            analysis_response = client.beta.chat.completions.parse(
                 model="gpt-3.5-turbo",
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant."},
+                    {"role": "system", "content": "Extract the information"},
                     {
                         "role": "user",
                         "content": f"Extract the following fields as JSON:\n"
@@ -86,6 +95,7 @@ class People:
                                    f"Text: {transcript_text}"
                     }
                 ]
+                # response_format=ContentFormat,
             )
         #     # Suppose it returns something like:
         #     #  {
@@ -93,14 +103,14 @@ class People:
         #     #    "last_recommendation": "Reading 'The Great Gatsby'",
         #     #    "other_interesting_items": "Loves painting, hiking"
         #     #  }
-        #     analysis_json = analysis_response["choices"][0]["message"]["content"]
+            analysis_json = analysis_response["choices"][0]["message"]["content"]
         #
         # For demonstration, let's just create a dummy JSON result:
-        analysis_json = {
-            "Name": "Alice",
-            "last_recommendation": "Reading 'The Great Gatsby'",
-            "other_interesting_items": "Enjoys painting, hiking",
-        }
+        # analysis_json = {
+        #     "Name": "Alice",
+        #     "last_recommendation": "Reading 'The Great Gatsby'",
+        #     "other_interesting_items": "Enjoys painting, hiking",
+        # }
 
         # 3) Convert the analysis into a dictionary for DataFrame
         #    We'll store the entire JSON in a column for reference
