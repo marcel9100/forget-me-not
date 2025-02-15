@@ -201,23 +201,24 @@ if tab == "Capture":
     
     audio_value = st.audio_input("Upload or record a voice message")
 
+    if st.button("Process Audio"):
+        People.process_audio_and_add_row(audio_value)
+        st.success("Audio processed and added to DataFrame!")
 
     # If we have an audio file, display it
     if audio_value is not None:
         audio_file = st.audio(audio_value.read())
 
-        if st.button("Process Audio"):
-            People.process_audio_and_add_row(audio_value)
-            st.success("Audio processed and added to DataFrame!")
-
     # -------------------------------------------------------------------------
     # 3.6 Display the DataFrame
     # -------------------------------------------------------------------------
+    if st.button("Clear All"):
+        audio_value = None
+    
     st.write("### Current DataFrame")
     st.dataframe(st.session_state.people_df)
 
-    if st.button("Clear All"):
-        audio_value = None
+    
         
 # -----------------------------------------------------------------------------
 # 4. The second tab content (placeholder)
