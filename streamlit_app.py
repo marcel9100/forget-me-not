@@ -421,7 +421,7 @@ elif tab == "Complete":
             # Underneath name, display the rest of the information
             st.write(f"**Last Recommendation:** {last_row['last_recommendation']}")
             st.write(f"**Other Interesting Items:** {last_row['other_interesting_items']}")
-            st.write("**Next Scheduled Meeting:** No Meeting in Your Google Calendar")
+            st.write("**Next Scheduled Meeting:** *No Meeting in Your Google Calendar*")
 
         # Show a list of suggested actions
         st.write("### What I think we should do...🤔")
