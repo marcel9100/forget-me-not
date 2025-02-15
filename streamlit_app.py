@@ -421,7 +421,7 @@ elif tab == "Complete":
             st.write(f"**Other Interesting Items:** {last_row['other_interesting_items']}")
 
         # Show a list of suggested actions
-        st.write("### Suggested Actions")
+        st.write("### What I think we should do...🤔")
 
         # Check if we have an OpenAI key
         if not st.session_state.get("openai_api_key"):
@@ -473,7 +473,7 @@ elif tab == "Complete":
                 def stream_data():
                     for word in pre_stream.split(" "):
                         yield word + " "
-                        time.sleep(0.02)
+                        time.sleep(1)
 
                 st.write_stream(stream_data)
 
