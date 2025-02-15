@@ -326,7 +326,7 @@ if tab == "Capture":
     
     audio_value = st.audio_input("Upload or record a voice message")
 
-    if st.button("Let Basil listen"):
+    if st.button("Let Basil listen in"):
         People.process_audio_and_add_row(audio_value)
         st.info("De-duplicated any profiles for you")
         st.success("Audio processed and added to brain!")
