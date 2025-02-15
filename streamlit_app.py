@@ -86,7 +86,7 @@ class People:
         #    to return JSON with the fields: Name, last_recommendation, other_interesting_items
         #
         with st.spinner("Analyzing text..."):
-            analysis_response = client.beta.chat.completions.parse(
+            analysis_response = client.beta.chat.completions.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "Extract the information"},
