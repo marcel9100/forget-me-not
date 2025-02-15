@@ -326,9 +326,9 @@ if tab == "Capture":
     
     audio_value = st.audio_input("Upload or record a voice message")
 
-    if st.button("Process Audio"):
+    if st.button("Let Basil listen"):
         People.process_audio_and_add_row(audio_value)
-        st.success("Audio processed and added to DataFrame!")
+        st.success("Audio processed and added to brain!")
 
     # If we have an audio file, display it
     if audio_value is not None:
