@@ -60,12 +60,12 @@ class People:
         # 1) Transcribe the audio (placeholder)
         #    For example, using the Whisper API endpoint (pseudo-code):
         #
-        # with st.spinner("Transcribing audio..."):
-        #     transcript_response = openai.Audio.transcribe(
-        #         model="whisper-1",
-        #         file=audio_bytes  # This might need a file-like object
-        #     )
-        #     transcript_text = transcript_response["text"]
+        with st.spinner("Transcribing audio..."):
+            transcript_response = openai.Audio.transcribe(
+                model="whisper-1",
+                file=audio_bytes  # This might need a file-like object
+            )
+            transcript_text = transcript_response["text"]
         #
         # For demonstration, let's pretend we got this transcript:
         transcript_text = "Hi, this is Alice. I recommend reading 'The Great Gatsby'."
@@ -74,19 +74,19 @@ class People:
         #    For example, using ChatCompletion with a system/prompt that instructs the model
         #    to return JSON with the fields: Name, last_recommendation, other_interesting_items
         #
-        # with st.spinner("Analyzing text..."):
-        #     analysis_response = openai.ChatCompletion.create(
-        #         model="gpt-3.5-turbo",
-        #         messages=[
-        #             {"role": "system", "content": "You are a helpful assistant."},
-        #             {
-        #                 "role": "user",
-        #                 "content": f"Extract the following fields as JSON:\n"
-        #                            f"Name, last_recommendation, other_interesting_items\n"
-        #                            f"Text: {transcript_text}"
-        #             }
-        #         ]
-        #     )
+        with st.spinner("Analyzing text..."):
+            analysis_response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant."},
+                    {
+                        "role": "user",
+                        "content": f"Extract the following fields as JSON:\n"
+                                   f"Name, last_recommendation, other_interesting_items\n"
+                                   f"Text: {transcript_text}"
+                    }
+                ]
+            )
         #     # Suppose it returns something like:
         #     #  {
         #     #    "Name": "Alice",
