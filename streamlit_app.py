@@ -70,11 +70,13 @@ class People:
         #    For example, using the Whisper API endpoint (pseudo-code):
         #
         with st.spinner("Transcribing audio..."):
-            transcript_response = client.audio.transcribe(
+            transcript_response = client.audio.transcriptions.create(
                 model="whisper-1",
                 file=audio_bytes  # This might need a file-like object
             )
-            transcript_text = transcript_response["text"]
+            transcript_text = transcript_response.text
+        
+        st.write(transcript_response)
         #
         # For demonstration, let's pretend we got this transcript:
         # transcript_text = "Hi, this is Alice. I recommend reading 'The Great Gatsby'."
