@@ -15,31 +15,104 @@ st.set_page_config(
 # -----------------------------------------------------------------------------
 # 1. Basic Styling with CSS (optional)
 # -----------------------------------------------------------------------------
-st.markdown(
-    """
-    <style>
-    /* Make sidebar have a subtle gradient background */
-    [data-testid="stSidebar"] {
-        background: linear-gradient(#fdf9ff, #e6f7f7);
-    }
+# st.markdown(
+#     """
+#     <style>
+#     /* Make sidebar have a subtle gradient background */
+#     [data-testid="stSidebar"] {
+#         background: linear-gradient(#fdf9ff, #e6f7f7);
+#     }
     
-    /* Style main title */
-    .main .block-container {
-        background-color: #ffffff;
-        padding: 2rem;
-        border-radius: 8px;
-        box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
+#     /* Style main title */
+#     .main .block-container {
+#         background-color: #ffffff;
+#         padding: 2rem;
+#         border-radius: 8px;
+#         box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+#     }
     
-    /* Optional: Tweak fonts */
-    h1, h2, h3 {
-        font-family: "Segoe UI", sans-serif;
-    }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+#     /* Optional: Tweak fonts */
+#     h1, h2, h3 {
+#         font-family: "Segoe UI", sans-serif;
+#     }
+#     </style>
+#     """,
+#     unsafe_allow_html=True
+# )
 
+# Add a theme toggle in the sidebar
+theme_mode = st.sidebar.radio("Select Theme Mode", options=["Light", "Dark"], index=0)
+
+if theme_mode == "Dark":
+    st.markdown(
+        """
+        <style>
+        /* Apply dark theme to entire app */
+        html, body, [data-testid="stAppViewContainer"] {
+            background-color: #222222;
+            color: #EEEEEE;
+        }
+        /* Dark sidebar styling */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(#2c2f33, #23272a);
+        }
+        /* Ensure sidebar text updates in dark mode */
+        [data-testid="stSidebar"] * {
+            color: #EEEEEE !important;
+        }
+        /* Dark main container styling */
+        .main .block-container {
+            background-color: #333333;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        h1, h2, h3 {
+            font-family: "Segoe UI", sans-serif;
+        }
+        button, input {
+            background-color: #444444 !important;
+            color: #EEEEEE !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        """
+        <style>
+        /* Apply light theme to entire app */
+        html, body, [data-testid="stAppViewContainer"] {
+            background-color: #ffffff;
+            color: #000000;
+        }
+        /* Light sidebar styling */
+        [data-testid="stSidebar"] {
+            background: linear-gradient(#fdf9ff, #e6f7f7);
+        }
+        /* Ensure sidebar text updates in light mode */
+        [data-testid="stSidebar"] * {
+            color: #000000 !important;
+        }
+        /* Light main container styling */
+        .main .block-container {
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            font-family: "Segoe UI", sans-serif;
+        }
+        button, input {
+            background-color: #eeeeee !important;
+            color: #000000 !important;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
 # -----------------------------------------------------------------------------
 # 2. Create Sidebar with Radio Buttons as "Tabs"
 # -----------------------------------------------------------------------------
