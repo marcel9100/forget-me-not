@@ -108,7 +108,7 @@ class People:
         #     #  }
             analysis_json = analysis_response.choices[0].message.content
             st.write(analysis_json)
-            analysis_json = json.loads(response_string)
+            analysis_json = json.loads(analysis_json)
             
         #
         # For demonstration, let's just create a dummy JSON result:
