@@ -68,7 +68,7 @@ class People:
             transcript_text = transcript_response["text"]
         #
         # For demonstration, let's pretend we got this transcript:
-        transcript_text = "Hi, this is Alice. I recommend reading 'The Great Gatsby'."
+        # transcript_text = "Hi, this is Alice. I recommend reading 'The Great Gatsby'."
 
         # 2) Analyze text and extract relevant data (placeholder)
         #    For example, using ChatCompletion with a system/prompt that instructs the model
