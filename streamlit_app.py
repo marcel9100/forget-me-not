@@ -497,11 +497,11 @@ elif tab == "Complete":
         # Create two columns for the Execute button and the robot emoji.
         col_exec, col_emoji = st.columns([2, 1])
         with col_exec:
-            if st.button("Execute these actions"):
-                st.success("Actions executed successfully!")
+            if st.button("Can I do this for you, Marcel?"):
+                st.success("All tasks completed 🙂, Basil✅")
                 st.session_state.robot_executed = True
         with col_emoji:
-            if st.session_state.get("Azalea has completed you actions!", False):
+            if st.session_state.get("Basil has completed you actions!", False):
                 st.write("🤖")
     else:
         st.write("No records available. Please add some data first.")
