@@ -139,7 +139,7 @@ if audio_value is not None:
     
 
     if st.button("Process Audio"):
-        People.process_audio_and_add_row(audio_value.read())
+        People.process_audio_and_add_row(audio_value)
         st.success("Audio processed and added to DataFrame!")
 
 # Display the DataFrame
