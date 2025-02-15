@@ -19,7 +19,7 @@ st.sidebar.image(
     width=100
 )
 
-st.sidebar.title("ForgetMeNot")
+st.sidebar.title("Basil")
 
 # -----------------------------------------------------------------------------
 # 1. Basic Styling with CSS (optional)
@@ -389,7 +389,7 @@ elif tab == "Curate":
     #         st.success("Selected rows deleted!")
 
 elif tab == "Complete":
-    display_page_header()
+
     st.title("Basil, Your Connection Assistant")
 
     # Check if there's any data in our DataFrame
