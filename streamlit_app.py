@@ -123,14 +123,8 @@ audio_value = st.audio_input("Upload or record a voice message")
 
 # If we have an audio file, let's "process" it
 if audio_value is not None:
-    audio_file = st.audio(audio_value)
+    audio_file = st.audio(audio_value.read())
     
-    if st.session_state["openai_api_key"]:
-      transcription = openai.audio.transcriptions.create(
-      model="whisper-1", 
-      file=audio_file
-      )
-      st.write(transcription)
 
     if st.button("Process Audio"):
         People.process_audio_and_add_row(audio_value.read())
