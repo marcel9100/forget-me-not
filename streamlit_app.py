@@ -32,8 +32,8 @@ st.session_state["openai_api_key"] = st.text_input(
 
 # Set the openai.api_key if available
 if st.session_state["openai_api_key"]:
-    # openai.api_key = 
-    client = OpenAI(st.session_state["openai_api_key"])
+    client = OpenAI(api_key =st.session_state["openai_api_key"])
+    
 
 # -----------------------------------------------------------------------------
 # SESSION STATE HELPER:
