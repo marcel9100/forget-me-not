@@ -16,7 +16,7 @@ st.set_page_config(
 
 st.sidebar.image(
     "https://image.pollinations.ai/prompt/A%20photorealistic%20portrait%20of%20Basil%20-%20a%20man%20in%20his%20early%2030s%20with%20olive%20skin,%20hazel%20eyes%20flecked%20with%20green,%20dark%20wavy%20brown%20hair,%20thin-framed%20glasses,%20wearing%20a%20sky-blue%20shirt%20and%20jacket%20inspired%20by%20forget-me-not%20flowers,%20with%20subtle%20golden-yellow%20accents%20to%20echo%20the%20flower%20centers,%20and%20a%20small%20golden%20floral%20pin%20on%20the%20lapel,%20set%20against%20a%20soft%20blue-white%20gradient%20background,%20exuding%20calm%20confidence%20and%20thoughtful%20curiosity.",
-    use_container_width=True
+    width=100
 )
 
 st.sidebar.title("ForgetMeNot")
