@@ -473,7 +473,7 @@ elif tab == "Complete":
                 def stream_data():
                     for word in pre_stream.split(" "):
                         yield word + " "
-                        time.sleep(1)
+                        time.sleep(0.04)
 
                 st.write_stream(stream_data)
 
