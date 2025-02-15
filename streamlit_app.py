@@ -172,6 +172,37 @@ def find_next_football_match():
     """
     return "Next Premier League match: Arsenal vs. West Ham on 22nd Feb ."
 
+# ----------------------------------------------------------------------------
+# New Helper Function: Find Similar Books
+# ----------------------------------------------------------------------------
+def find_similar_books(book_info: str):
+    """
+    Given a book description or recommendation, call the OpenAI API to suggest similar books.
+    Returns a list of suggested book titles.
+    """
+    if not st.session_state.get("openai_api_key"):
+        st.error("Please go to the 'Capture' tab and enter your OpenAI API key first.")
+        return []
+    client = OpenAI(api_key=st.session_state["openai_api_key"])
+    with st.spinner("Searching for similar books..."):
+        try:
+            response = client.chat.completions.create(
+                model="gpt-3.5-turbo",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant that suggests similar books."},
+                    {"role": "user", "content": f"Based on the following book recommendation or description, suggest similar books that might be of interest: {book_info}. Please return your answer as a JSON array of book titles."}
+                ]
+            )
+            response_str = response.choices[0].message.content
+            try:
+                suggestions = json.loads(response_str)
+            except Exception:
+                suggestions = [response_str]
+        except Exception as e:
+            st.error(f"OpenAI API call failed: {e}")
+            suggestions = []
+    return suggestions
+
 # -----------------------------------------------------------------------------
 # 3. If user chooses the first tab: show the existing content
 # -----------------------------------------------------------------------------
@@ -368,7 +399,7 @@ elif tab == "Complete":
         col1, col2 = st.columns([1, 4])
         with col1:
             # Placeholder image (replace URL or logic with your own image if available)
-            st.image("https://via.placeholder.com/150",
+            st.image("https://t3.ftcdn.net/jpg/05/16/27/58/360_F_516275801_f3Fsp17x6HQK0xQgDQEELoTuERO4SsWV.jpg", #https://via.placeholder.com/150",
                      caption="Placeholder Image",
                      use_container_width=True)
         with col2:
@@ -429,11 +460,21 @@ elif tab == "Complete":
                 st.write("- " + suggestion)
 
             # (Optional) If "football" is mentioned, do a placeholder web search
-            if "football" in last_row["other_interesting_items"].lower():
+            if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
                 st.write("#### Football Detected - Searching next match...")
                 next_match = find_next_football_match()  # Placeholder function
                 st.write(f"**Next match info:** {next_match}")
 
+
+            # If "book" is mentioned in the recommendation or interests, call the new helper function.
+            if ("book" in selected_row["last_recommendation"].lower() or 
+                "book" in selected_row["other_interesting_items"].lower()):
+                st.write("#### Book Detected - Searching for similar books...")
+                similar_books = find_similar_books(selected_row["last_recommendation"])
+                if similar_books:
+                    st.write("**Similar Books:**")
+                    for book in similar_books:
+                        st.write("- " + book)
 
         # Execute actions button
         if st.button("Execute these actions"):
