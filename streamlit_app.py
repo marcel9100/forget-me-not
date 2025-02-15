@@ -216,16 +216,15 @@ elif tab == "Retrieve":
         st.session_state.people_df = edited_df
         st.success("Changes saved to DataFrame!")
 
-    # -- Delete row(s): let user select by index
-    if not st.session_state.people_df.empty:
-        selected_indices = st.multiselect(
-            "Select row indices to delete:",
-            st.session_state.people_df.index
-        )
-        if st.button("Delete Selected Rows"):
-            st.session_state.people_df.drop(index=selected_indices, inplace=True)
-            st.session_state.people_df.reset_index(drop=True, inplace=True)
-            st.success("Selected rows deleted!")
+    # # -- Delete row(s): let user select by index
+    # if not st.session_state.people_df.empty:
+    #     selected_indices = st.multiselect(
+    #         "Select row indices to delete:",
+    #         st.session_state.people_df.index
+    #     )
+    #     if st.button("Delete Selected Rows"):
+    #         st.session_state.people_df.drop(index=selected_indices, inplace=True)
+    #         st.session_state.people_df.reset_index(drop=True, inplace=True)
+    #         st.success("Selected rows deleted!")
 
-    st.write("### Current Data")
-    st.dataframe(st.session_state.people_df, use_container_width=True)
+    
