@@ -499,7 +499,7 @@ elif tab == "Complete":
                 # (Optional) If "football" is mentioned, do a placeholder web search
                 if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
                     interim_text = "#### Football Detected - Searching next match...Booking next match..."
-                    
+                    st.write(last_row["other_interesting_items"].lower())
                     def stream_data_football():
                         for word in interim_text.split(" "):
                             yield word + " "
