@@ -7,7 +7,7 @@ from pydantic import BaseModel
 
 # Optional: Set page config for a nicer look and a custom page title/icon
 st.set_page_config(
-    page_title="forget me not",
+    page_title="ForgetMeNot",
     page_icon="🌸",
     layout="centered"
 )
@@ -46,7 +46,41 @@ st.markdown(
 tab = st.sidebar.radio("Navigation", ["Capture", "Retrieve"])
 
 if "people_df" not in st.session_state:
+    initial_data = [
+        {
+            "Name": "Alice",
+            "last_recommendation": "Catch up over coffee next week",
+            "other_interesting_items": "Tech startup founder, loves painting",
+            "analysis_json": {}
+        },
+        {
+            "Name": "Bob",
+            "last_recommendation": "Try the new sushi restaurant in town",
+            "other_interesting_items": "Enjoys rock climbing, big football fan",
+            "analysis_json": {}
+        },
+        {
+            "Name": "Charlie",
+            "last_recommendation": "Book recommendation: 'Atomic Habits'",
+            "other_interesting_items": "Recently moved to LA, into photography",
+            "analysis_json": {}
+        },
+        {
+            "Name": "Diana",
+            "last_recommendation": "Invite to weekend beach trip",
+            "other_interesting_items": "Dog lover, musician",
+            "analysis_json": {}
+        },
+        {
+            "Name": "Ethan",
+            "last_recommendation": "Suggest a local hackathon event",
+            "other_interesting_items": "Self-taught programmer, coffee connoisseur",
+            "analysis_json": {}
+        }
+    ]
+    
     st.session_state.people_df = pd.DataFrame(
+        initial_data,
         columns=["Name", "last_recommendation", "other_interesting_items", "analysis_json"]
     )
 
@@ -59,7 +93,7 @@ if "audio_file" not in st.session_state:
 if tab == "Capture":
     
     # -- Title (moved inside the "Main" tab)
-    st.title("Forget Me Not")
+    st.title("ForgetMeNot")
     st.write(
         "Tired of forgetting names as you meet new people?\n"
         "Never remember the last interactions?\n"
@@ -189,7 +223,7 @@ if tab == "Capture":
 # 4. The second tab content (placeholder)
 # -----------------------------------------------------------------------------
 elif tab == "Retrieve":
-    st.title("Forget Me Not")
+    st.title("ForgetMeNot")
     # st.write(
     #     """
     #     **forget me not** helps you remember important details about the people you meet,
