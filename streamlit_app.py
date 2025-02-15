@@ -43,7 +43,7 @@ st.markdown(
 # -----------------------------------------------------------------------------
 # 2. Create Sidebar with Radio Buttons as "Tabs"
 # -----------------------------------------------------------------------------
-tab = st.sidebar.radio("Navigation", ["Capture", "Retrieve"])
+tab = st.sidebar.radio("Navigation", ["Capture", "Retrieve", "Action"])
 
 if "people_df" not in st.session_state:
     initial_data = [
@@ -262,4 +262,37 @@ elif tab == "Retrieve":
     #         st.session_state.people_df.reset_index(drop=True, inplace=True)
     #         st.success("Selected rows deleted!")
 
+elif tab == "Action":
+    st.title("ForgetMeNot")
+
+    # Check if there's any data in our DataFrame
+    if not st.session_state.people_df.empty:
+        # Grab the last row
+        last_row = st.session_state.people_df.iloc[-1]
+
+        # Create two columns: one for the image, one for the text
+        col1, col2 = st.columns([1, 4])
+        with col1:
+            # Placeholder image (replace URL or logic with your own image if available)
+            st.image("https://via.placeholder.com/150",
+                     caption="Placeholder Image",
+                     use_container_width=True)
+        with col2:
+            # Display Name next to the image
+            st.subheader(last_row["Name"])
+            # Underneath name, display the rest of the information
+            st.write(f"**Last Recommendation:** {last_row['last_recommendation']}")
+            st.write(f"**Other Interesting Items:** {last_row['other_interesting_items']}")
+
+        # Show a list of suggested actions
+        st.write("### Suggested Actions")
+        st.write("- Find the most recent Arsenal mathc")
+        st.write("- Buy tickets for this game if under £100")
+        st.write("- Email tickets back to them")
+
+        # Execute actions button
+        if st.button("Execute these actions"):
+            st.success("Actions executed successfully!")
+    else:
+        st.write("No records available. Please add some data first.")
     
