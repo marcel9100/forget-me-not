@@ -457,8 +457,13 @@ elif tab == "Complete":
             
             # Display the suggestions
             for suggestion in suggestions:
-                # st.write("- " + suggestion)
-                st.write_stream("- " + suggestion)
+                pre_stream = "- " + suggestion
+                def stream_data():
+                    for word in pre_stream.split(" "):
+                        yield word + " "
+                        time.sleep(0.02)
+
+                st.write_stream(stream_data)
 
             # # (Optional) If "football" is mentioned, do a placeholder web search
             # if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
