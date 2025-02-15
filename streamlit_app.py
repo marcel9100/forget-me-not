@@ -340,7 +340,7 @@ if tab == "Capture":
     if st.button("Clear All"):
         audio_value = None
     
-    st.write("### Current DataFrame")
+    st.write("### Basil's Brain")
     st.dataframe(st.session_state.people_df)
 
     
@@ -362,7 +362,7 @@ elif tab == "Curate":
     #     """
     # )
     
-    st.write("Below is a table of all your interactions so far. You can **create, read, update, or delete** rows.")
+    st.write("Peep inside Basil's memory of all your interactions so far... Would you like to add a new connection?")
 
     # -- Display an editable data editor (Streamlit >= 1.22)
     edited_df = st.data_editor(
