@@ -483,9 +483,15 @@ elif tab == "Complete":
             #         for book in similar_books:
             #             st.write("- " + book)
 
-        # Execute actions button
-        if st.button("Execute these actions"):
-            st.success("Actions executed successfully!")
+        # Create two columns for the Execute button and the robot emoji.
+        col_exec, col_emoji = st.columns([2, 1])
+        with col_exec:
+            if st.button("Execute these actions"):
+                st.success("Actions executed successfully!")
+                st.session_state.robot_executed = True
+        with col_emoji:
+            if st.session_state.get("Azalea has completed you actions!", False):
+                st.write("🤖")
     else:
         st.write("No records available. Please add some data first.")
     
