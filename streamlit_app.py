@@ -43,7 +43,7 @@ st.markdown(
 # -----------------------------------------------------------------------------
 # 2. Create Sidebar with Radio Buttons as "Tabs"
 # -----------------------------------------------------------------------------
-tab = st.sidebar.radio("Navigation", ["Capture", "Retrieve", "Action"])
+tab = st.sidebar.radio("Navigation", ["Capture", "Curate", "Complete"])
 
 if "people_df" not in st.session_state:
     initial_data = [
@@ -235,7 +235,7 @@ if tab == "Capture":
 # -----------------------------------------------------------------------------
 # 4. The second tab content (placeholder)
 # -----------------------------------------------------------------------------
-elif tab == "Retrieve":
+elif tab == "Curate":
     st.title("ForgetMeNot")
     # st.write(
     #     """
@@ -274,7 +274,7 @@ elif tab == "Retrieve":
     #         st.session_state.people_df.reset_index(drop=True, inplace=True)
     #         st.success("Selected rows deleted!")
 
-elif tab == "Action":
+elif tab == "Complete":
     st.title("ForgetMeNot")
 
     # Check if there's any data in our DataFrame
