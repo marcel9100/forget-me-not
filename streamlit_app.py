@@ -158,6 +158,12 @@ if "people_df" not in st.session_state:
             "last_recommendation": "Suggest a local hackathon event",
             "other_interesting_items": "Self-taught programmer, coffee connoisseur",
             "analysis_json": {}
+        },
+        {
+            "Name":"Owen",
+            "last_recommendation": "The Great Gatsby",
+            "other_interesting_items": "Arsenal football club, building companies to unicorn status",
+            "analysis_json": {}
         }
     ]
     
