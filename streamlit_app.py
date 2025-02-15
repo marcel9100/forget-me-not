@@ -107,7 +107,9 @@ class People:
         #     #    "other_interesting_items": "Loves painting, hiking"
         #     #  }
             analysis_json = analysis_response.choices[0].message.content
+            st.write(analysis_json)
             analysis_json = json.loads(response_string)
+            
         #
         # For demonstration, let's just create a dummy JSON result:
         # analysis_json = {
