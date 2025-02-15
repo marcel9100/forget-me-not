@@ -328,7 +328,7 @@ if tab == "Capture":
 
     if st.button("Let Basil listen"):
         People.process_audio_and_add_row(audio_value)
-        st.info("De-duplicaiton checks complete")
+        st.info("De-duplication checks complete")
         st.success("Audio processed and added to brain!")
         
 
