@@ -509,6 +509,7 @@ elif tab == "Complete":
 
                     next_match = find_next_football_match()  # Placeholder function
                     st.write(f"**Next match info:** {next_match}")
+                    st.write("## Booked ✅")
 
         with col_emoji:
             if st.session_state.get("Basil has completed you actions!", False):
