@@ -2,12 +2,12 @@ import streamlit as st
 import pandas as pd
 
 from openai import OpenAI
-import openai
+
 
 
 
 # Set your OpenAI API key (or use another method to load securely)
-openai.api_key = "YOUR_OPENAI_API_KEY"
+# openai.api_key = "YOUR_OPENAI_API_KEY"
 
 # Initialize Streamlit
 st.title("🎈 Forget Me Not")
@@ -32,8 +32,8 @@ st.session_state["openai_api_key"] = st.text_input(
 
 # Set the openai.api_key if available
 if st.session_state["openai_api_key"]:
-    openai.api_key = st.session_state["openai_api_key"]
-    #client = OpenAI()
+    # openai.api_key = 
+    client = OpenAI(st.session_state["openai_api_key"])
 
 # -----------------------------------------------------------------------------
 # SESSION STATE HELPER:
@@ -61,7 +61,7 @@ class People:
         #    For example, using the Whisper API endpoint (pseudo-code):
         #
         with st.spinner("Transcribing audio..."):
-            transcript_response = openai.Audio.transcribe(
+            transcript_response = client.Audio.transcribe(
                 model="whisper-1",
                 file=audio_bytes  # This might need a file-like object
             )
@@ -75,7 +75,7 @@ class People:
         #    to return JSON with the fields: Name, last_recommendation, other_interesting_items
         #
         with st.spinner("Analyzing text..."):
-            analysis_response = openai.ChatCompletion.create(
+            analysis_response = client.ChatCompletion.create(
                 model="gpt-3.5-turbo",
                 messages=[
                     {"role": "system", "content": "You are a helpful assistant."},
