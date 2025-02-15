@@ -173,7 +173,7 @@ if tab == "Capture":
                     ]
                 )
                 analysis_json_str = analysis_response.choices[0].message.content
-                st.write("**Analysis raw JSON string:**", analysis_json_str)
+                # st.write("**Analysis raw JSON string:**", analysis_json_str)
                 
                 try:
                     analysis_json = json.loads(analysis_json_str)
