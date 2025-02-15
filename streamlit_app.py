@@ -45,6 +45,14 @@ st.markdown(
 # -----------------------------------------------------------------------------
 tab = st.sidebar.radio("Navigation", ["Capture", "Retrieve"])
 
+if "people_df" not in st.session_state:
+    st.session_state.people_df = pd.DataFrame(
+        columns=["Name", "last_recommendation", "other_interesting_items", "analysis_json"]
+    )
+
+if "audio_file" not in st.session_state:
+    st.session_state.audio_file = None
+
 # -----------------------------------------------------------------------------
 # 3. If user chooses the first tab: show the existing content
 # -----------------------------------------------------------------------------
@@ -79,10 +87,10 @@ if tab == "Capture":
     # -------------------------------------------------------------------------
     # 3.2 Session State for DataFrame
     # -------------------------------------------------------------------------
-    if "people_df" not in st.session_state:
-        st.session_state.people_df = pd.DataFrame(
-            columns=["Name", "last_recommendation", "other_interesting_items", "analysis_json"]
-        )
+    # if "people_df" not in st.session_state:
+    #     st.session_state.people_df = pd.DataFrame(
+    #         columns=["Name", "last_recommendation", "other_interesting_items", "analysis_json"]
+    #     )
 
     # -------------------------------------------------------------------------
     # 3.3 Model for content formatting (not strictly needed, but nice for structure)
@@ -174,18 +182,50 @@ if tab == "Capture":
     st.write("### Current DataFrame")
     st.dataframe(st.session_state.people_df)
 
+    if st.button("Clear All"):
+        audio_value = None
+        
 # -----------------------------------------------------------------------------
 # 4. The second tab content (placeholder)
 # -----------------------------------------------------------------------------
 elif tab == "Retrieve":
     st.title("Forget Me Not")
-    st.write(
-        """
-        **forget me not** helps you remember important details about the people you meet,
-        powered by OpenAI's Whisper (for transcription) and GPT (for text analysis).
+    # st.write(
+    #     """
+    #     **forget me not** helps you remember important details about the people you meet,
+    #     powered by OpenAI's Whisper (for transcription) and GPT (for text analysis).
         
-        \n\n
-        - **Tab 1 (Main):** Record or upload audio, process it, and see extracted info.
-        - **Tab 2 (About):** Learn more about this project or add more details here.
-        """
+    #     \n\n
+    #     - **Tab 1 (Main):** Record or upload audio, process it, and see extracted info.
+    #     - **Tab 2 (About):** Learn more about this project or add more details here.
+    #     """
+    # )
+    
+    st.write("Below is a table of all your interactions so far. You can **create, read, update, or delete** rows.")
+
+    # -- Display an editable data editor (Streamlit >= 1.22)
+    edited_df = st.data_editor(
+        st.session_state.people_df,
+        num_rows="dynamic",         # Allow adding new rows
+        use_container_width=True,   # Expand to width of container
+        key="crm_editor"
     )
+
+    # Save changes (Update)
+    if st.button("Save Changes"):
+        st.session_state.people_df = edited_df
+        st.success("Changes saved to DataFrame!")
+
+    # -- Delete row(s): let user select by index
+    if not st.session_state.people_df.empty:
+        selected_indices = st.multiselect(
+            "Select row indices to delete:",
+            st.session_state.people_df.index
+        )
+        if st.button("Delete Selected Rows"):
+            st.session_state.people_df.drop(index=selected_indices, inplace=True)
+            st.session_state.people_df.reset_index(drop=True, inplace=True)
+            st.success("Selected rows deleted!")
+
+    st.write("### Current Data")
+    st.dataframe(st.session_state.people_df, use_container_width=True)
