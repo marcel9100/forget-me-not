@@ -457,24 +457,25 @@ elif tab == "Complete":
             
             # Display the suggestions
             for suggestion in suggestions:
-                st.write("- " + suggestion)
+                # st.write("- " + suggestion)
+                st.write_stream("- " + suggestion)
 
-            # (Optional) If "football" is mentioned, do a placeholder web search
-            if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
-                st.write("#### Football Detected - Searching next match...")
-                next_match = find_next_football_match()  # Placeholder function
-                st.write(f"**Next match info:** {next_match}")
+            # # (Optional) If "football" is mentioned, do a placeholder web search
+            # if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
+            #     st.write("#### Football Detected - Searching next match...")
+            #     next_match = find_next_football_match()  # Placeholder function
+            #     st.write(f"**Next match info:** {next_match}")
 
 
-            # If "book" is mentioned in the recommendation or interests, call the new helper function.
-            if ("book" in last_row["last_recommendation"].lower() or 
-                "book" in last_row["other_interesting_items"].lower()):
-                st.write("#### Book Detected - Searching for similar books...")
-                similar_books = find_similar_books(last_row["last_recommendation"])
-                if similar_books:
-                    st.write("**Similar Books:**")
-                    for book in similar_books:
-                        st.write("- " + book)
+            # # If "book" is mentioned in the recommendation or interests, call the new helper function.
+            # if ("book" in last_row["last_recommendation"].lower() or 
+            #     "book" in last_row["other_interesting_items"].lower()):
+            #     st.write("#### Book Detected - Searching for similar books...")
+            #     similar_books = find_similar_books(last_row["last_recommendation"])
+            #     if similar_books:
+            #         st.write("**Similar Books:**")
+            #         for book in similar_books:
+            #             st.write("- " + book)
 
         # Execute actions button
         if st.button("Execute these actions"):
