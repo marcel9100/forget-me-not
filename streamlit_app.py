@@ -477,12 +477,7 @@ elif tab == "Complete":
 
                 st.write_stream(stream_data)
 
-            # # (Optional) If "football" is mentioned, do a placeholder web search
-            # if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
-            #     st.write("#### Football Detected - Searching next match...")
-            #     next_match = find_next_football_match()  # Placeholder function
-            #     st.write(f"**Next match info:** {next_match}")
-
+            
 
             # # If "book" is mentioned in the recommendation or interests, call the new helper function.
             # if ("book" in last_row["last_recommendation"].lower() or 
@@ -500,6 +495,13 @@ elif tab == "Complete":
             if st.button("Can I do this for you, Marcel?"):
                 st.success("All tasks completed 🙂, Basil✅")
                 st.session_state.robot_executed = True
+
+                # (Optional) If "football" is mentioned, do a placeholder web search
+                if "football" or "Arsenal" in last_row["other_interesting_items"].lower():
+                    st.write("#### Football Detected - Searching next match...")
+                    next_match = find_next_football_match()  # Placeholder function
+                    st.write(f"**Next match info:** {next_match}")
+
         with col_emoji:
             if st.session_state.get("Basil has completed you actions!", False):
                 st.write("🤖")
