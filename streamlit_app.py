@@ -105,7 +105,7 @@ class People:
         #     #    "last_recommendation": "Reading 'The Great Gatsby'",
         #     #    "other_interesting_items": "Loves painting, hiking"
         #     #  }
-            analysis_json = analysis_response["choices"][0]["message"]["content"]
+            analysis_json = analysis_response.choices[0].message.content
         #
         # For demonstration, let's just create a dummy JSON result:
         # analysis_json = {
