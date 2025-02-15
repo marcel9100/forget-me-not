@@ -88,6 +88,18 @@ if "audio_file" not in st.session_state:
     st.session_state.audio_file = None
 
 # -----------------------------------------------------------------------------
+# Utility function: placeholder for "next football match" search
+# -----------------------------------------------------------------------------
+def find_next_football_match():
+    """
+    Placeholder function to simulate searching the web for the next football match.
+    In a real scenario, you could call an external API, e.g.:
+    - requests.get("https://api.football-data.org/...") 
+    - or any sports data provider
+    """
+    return "Next Premier League match: Arsenal vs. Man City on Sunday at 4 PM."
+
+# -----------------------------------------------------------------------------
 # 3. If user chooses the first tab: show the existing content
 # -----------------------------------------------------------------------------
 if tab == "Capture":
@@ -286,9 +298,60 @@ elif tab == "Action":
 
         # Show a list of suggested actions
         st.write("### Suggested Actions")
-        st.write("- Find the most recent Arsenal mathc")
-        st.write("- Buy tickets for this game if under £100")
-        st.write("- Email tickets back to them")
+
+        # Check if we have an OpenAI key
+        if not st.session_state.get("openai_api_key"):
+            st.error("Please go to the 'Capture' tab and enter your OpenAI API key first.")
+        else:
+            # Create a client
+            client = OpenAI(api_key=st.session_state["openai_api_key"])
+
+            # Call GPT to get suggestions
+            with st.spinner("Generating suggestions..."):
+                try:
+                    response = client.chat.completions.create(
+                        model="gpt-3.5-turbo",
+                        messages=[
+                            {
+                                "role": "system",
+                                "content": (
+                                    "You are a helpful assistant. The user wants to figure out meaningful "
+                                    "or creative next steps to connect with someone based on the person's interests. "
+                                    "Return your answer as a valid JSON array of short suggestions."
+                                )
+                            },
+                            {
+                                "role": "user",
+                                "content": f"""
+                                The person has the following interests or background:
+                                {last_row['other_interesting_items']}
+
+                                Provide 2-4 suggested actions or next steps I could take, in JSON array format only, 
+                                e.g. ["Invite them to a painting workshop", "Share interesting tech articles"].
+                                """
+                            }
+                        ]
+                    )
+                    suggestions_str = response.choices[0].message.content
+                    # Attempt to parse JSON
+                    try:
+                        suggestions = json.loads(suggestions_str)
+                    except:
+                        suggestions = ["Could not parse the suggestions from JSON."]
+                except Exception as e:
+                    st.error(f"OpenAI API call failed: {e}")
+                    suggestions = ["No suggestions due to error."]
+            
+            # Display the suggestions
+            for suggestion in suggestions:
+                st.write("- " + suggestion)
+
+            # (Optional) If "football" is mentioned, do a placeholder web search
+            if "football" in last_row["other_interesting_items"].lower():
+                st.write("#### Football Detected - Searching next match...")
+                next_match = find_next_football_match()  # Placeholder function
+                st.write(f"**Next match info:** {next_match}")
+
 
         # Execute actions button
         if st.button("Execute these actions"):
